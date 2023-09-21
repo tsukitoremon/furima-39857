@@ -12,38 +12,40 @@
 | last_name              | string  | null: false               |
 | first_name_yomi        | string  | null: false               |
 | last_name_yomi         | string  | null: false               |
-| birthday               | integer | null: false               |
+| date                   | integer | null: false               |
 
 ### Association
 
-- has_many :item
-- has_many :comment
-- has_many :order
+- has_many :items
+- has_many :comments
+- has_many :orders
 
 ## items テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| item_name     | string     | null: false                    |
-| user          | references | null: false, foreign_key: true |
-| price         | integer    | null: false                    |
-| good_btn      | integer    |                                |
-| content       | text       | null: false                    |
-| delivery_date | integer    | null: false                    |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| item_name        | string     | null: false                    |
+| user             | references | null: false, foreign_key: true |
+| price            | integer    | null: false                    |
+| content          | text       | null: false                    |
+| category_id      | integer    | null: false                    |
+| condition_id     | integer    | null: false                    |
+| delivery_from_id | integer    | null: false                    |
+| delivery_date_id | integer    | null: false                    |
+| delivery_cost_id | integer    | null: false                    |
 
 ### Association
 
 - belongs_to :user
-- has_many :comment
-- has_many :recipient
+- has_many :comments
+- has_many :recipients
 
 ## orders テーブル
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| seller       | references | null: false, foreign_key: true |
+| user         | references | null: false, foreign_key: true |
 | item         | references | null: false, foreign_key: true |
-| price        | integer    | null: false                    |
 
 ### Association
 
@@ -52,13 +54,12 @@
 
 ## recipients テーブル
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| buyer        | references | null: false, foreign_key: true |
-| item         | references | null: false, foreign_key: true |
-| post_code    | string     | null: false                    |
-| tel_number   | string     | null: false                    |
-| address      | string     | null: false                    |
+| Column           | Type    | Options                       |
+| ---------------- | ------- | ----------------------------- |
+| post_code        | string  | null: false                   |
+| tel_number       | string  | null: false                   |
+| delivery_from_id | integer | null: false                   |
+| address          | string  | null: false                   |
 
 ### Association
 
@@ -69,9 +70,9 @@
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
-| content | string     |                                |
 | user    | references | null: false, foreign_key: true |
 | item    | references | null: false, foreign_key: true |
+| content | string     |                                |
 
 ### Association
 
