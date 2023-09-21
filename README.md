@@ -50,14 +50,14 @@
 ### Association
 
 - belongs_to :user
-- has_one :item
+- belongs_to :item
 - has_one :recipient
 
 ## recipients テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| user             | references | null: false, foreign_key: true |
+| user             | string     | null: false                    |
 | post_code        | string     | null: false                    |
 | tel_number       | string     | null: false                    |
 | delivery_from_id | integer    | null: false                    |
