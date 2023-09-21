@@ -24,7 +24,7 @@
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| item             | string     | null: false, foreign_key: true |
+| item             | string     | null: false                    |
 | user             | references | null: false, foreign_key: true |
 | price            | integer    | null: false                    |
 | content          | text       | null: false                    |
@@ -39,7 +39,6 @@
 - belongs_to :user
 - has_many :comments
 - has_one :order
-- has_one :recipient
 
 ## orders テーブル
 
@@ -58,6 +57,7 @@
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
+| price            | integer    | null: false                    |
 | post_code        | string     | null: false                    |
 | tel_number       | string     | null: false                    |
 | delivery_from_id | integer    | null: false                    |
@@ -67,7 +67,6 @@
 
 ### Association
 
-- belongs_to :item
 - belongs_to :order
 
 ## comments テーブル
