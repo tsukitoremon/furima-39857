@@ -55,14 +55,15 @@
 
 ## recipients テーブル
 
-| Column           | Type    | Options                       |
-| ---------------- | ------- | ----------------------------- |
-| post_code        | string  | null: false                   |
-| tel_number       | string  | null: false                   |
-| delivery_from_id | integer | null: false                   |
-| address_city     | string  | null: false                   |
-| address_street   | string  | null: false                   |
-| address_building | string  | null: false                   |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| user             | references | null: false, foreign_key: true |
+| post_code        | string     | null: false                    |
+| tel_number       | string     | null: false                    |
+| delivery_from_id | integer    | null: false                    |
+| address_city     | string     | null: false                    |
+| address_street   | string     | null: false                    |
+| address_building | string     | null: false                    |
 
 ### Association
 
