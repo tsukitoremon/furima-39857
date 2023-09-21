@@ -12,7 +12,7 @@
 | last_name              | string  | null: false               |
 | first_name_yomi        | string  | null: false               |
 | last_name_yomi         | string  | null: false               |
-| date                   | integer | null: false               |
+| birthday               | date    | null: false               |
 
 ### Association
 
@@ -38,7 +38,7 @@
 
 - belongs_to :user
 - has_many :comments
-- has_many :recipients
+- has_one :order
 
 ## orders テーブル
 
@@ -50,6 +50,7 @@
 ### Association
 
 - belongs_to :user
+- has_one :item
 - has_one :recipient
 
 ## recipients テーブル
@@ -59,11 +60,12 @@
 | post_code        | string  | null: false                   |
 | tel_number       | string  | null: false                   |
 | delivery_from_id | integer | null: false                   |
-| address          | string  | null: false                   |
+| address_city     | string  | null: false                   |
+| address_street   | string  | null: false                   |
+| address_building | string  | null: false                   |
 
 ### Association
 
-- belongs_to :item
 - belongs_to :order
 
 ## comments テーブル
