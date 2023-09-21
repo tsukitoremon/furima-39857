@@ -17,7 +17,6 @@
 ### Association
 
 - has_many :items
-- has_many :comments
 - has_many :orders
 
 ## items テーブル
@@ -37,7 +36,6 @@
 ### Association
 
 - belongs_to :user
-- has_many :comments
 - has_one :order
 
 ## orders テーブル
@@ -63,21 +61,8 @@
 | delivery_from_id | integer    | null: false                    |
 | address_city     | string     | null: false                    |
 | address_street   | string     | null: false                    |
-| address_building | string     | null: false                    |
+| address_building | string     |                                |
 
 ### Association
 
 - belongs_to :order
-
-## comments テーブル
-
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| user    | references | null: false, foreign_key: true |
-| item    | references | null: false, foreign_key: true |
-| content | string     |                                |
-
-### Association
-
-- belongs_to :user
-- belongs_to :item
