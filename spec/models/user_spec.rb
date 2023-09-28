@@ -37,20 +37,40 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name can't be blank")
     end
+    it 'last_nameが半角英数では登録できない' do
+      @user.last_name = '111'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name is invalid. Input full-width characters.")
+    end
     it 'first_nameが空では登録できない' do
       @user.first_name = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("First name can't be blank")
+    end
+      it 'first_nameが半角英数では登録できない' do
+        @user.first_name = 'aaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid. Input full-width characters.")
     end
     it 'last_name_yomiが空では登録できない' do
       @user.last_name_yomi = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name yomi can't be blank")
     end
+      it 'last_name_yomiがひらがなでは登録できない' do
+        @user.last_name_yomi = 'やまだ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name yomi is invalid. Input full-width katakana characters.")
+    end
     it 'first_name_yomiが空では登録できない' do
       @user.first_name_yomi = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("First name yomi can't be blank")
+    end
+    it 'first_name_yomiがひらがなでは登録できない' do
+      @user.first_name_yomi = 'りくたろう'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name yomi is invalid. Input full-width katakana characters.")
     end
     it 'birthdayが空では登録できない' do
       @user.birthday = ''
