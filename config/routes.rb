@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'devise/registrations' }
+  devise_for :users
   root to: "items#index"
   resources :items
-  resources :users, only: [:index, :new, :create, :destroy]
+  
 
 end
