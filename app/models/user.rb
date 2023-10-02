@@ -19,7 +19,6 @@ class User < ApplicationRecord
   validates :first_name_yomi, format: { with: /\A[ァ-ヶー]+\z/, message: 'is invalid. Input full-width katakana characters.' },
                               allow_blank: true
   validates :birthday, presence: true
-  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: 'is invalid. Include both letters and numbers' },
-                              on: :create, allow_blank: true
-
+  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: 'is invalid. Include both letters and numbers' },
+                       on: :create, allow_blank: true
 end
