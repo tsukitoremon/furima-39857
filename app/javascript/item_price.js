@@ -5,7 +5,7 @@ const actualProfit = document.getElementById("profit" );
 
 priceInput.addEventListener("input", function() {
   const inputValue = priceInput.value;
-   console.log(inputValue);
+
 
    addTaxDom.innerHTML = Math.floor(inputValue * 0.1)
    actualProfit.innerHTML = Math.floor(inputValue - Math.floor(inputValue * 0.1))

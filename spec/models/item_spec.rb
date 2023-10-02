@@ -22,6 +22,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Item is too long (maximum is 40 characters)')
       end
+      it 'contentが空では登録できない' do
+        @item.content = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Content can't be blank")
+      end
       it 'category_idが---では登録できない' do
         @item.category_id = '1'
         @item.valid?
@@ -71,6 +76,11 @@ RSpec.describe Item, type: :model do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+      it 'userが紐づいていなければ登録できない' do
+        @item.user_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
