@@ -45,10 +45,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_115010) do
     t.integer "price", null: false
     t.text "content", null: false
     t.integer "category_id", null: false
-    t.integer "conditon_id", null: false
-    t.integer "delivery_from", null: false
-    t.integer "delivery_date", null: false
-    t.integer "delivery_cost", null: false
+    t.integer "condition_id", null: false
+    t.integer "delivery_from_id", null: false
+    t.integer "delivery_date_id", null: false
+    t.integer "delivery_cost_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"

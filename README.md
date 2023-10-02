@@ -29,9 +29,9 @@
 | content          | text       | null: false                    |
 | category_id      | integer    | null: false                    |
 | condition_id     | integer    | null: false                    |
-| delivery_from_id | integer    | null: false                    |
-| delivery_date_id | integer    | null: false                    |
-| delivery_cost_id | integer    | null: false                    |
+| delivery_from_id_id | integer    | null: false                    |
+| delivery_date_id_id | integer    | null: false                    |
+| delivery_cost_id_id | integer    | null: false                    |
 
 ### Association
 
@@ -58,7 +58,7 @@
 | price            | integer    | null: false                    |
 | post_code        | string     | null: false                    |
 | tel_number       | string     | null: false                    |
-| delivery_from_id | integer    | null: false                    |
+| delivery_from_id_id | integer    | null: false                    |
 | address_city     | string     | null: false                    |
 | address_street   | string     | null: false                    |
 | address_building | string     |                                |
