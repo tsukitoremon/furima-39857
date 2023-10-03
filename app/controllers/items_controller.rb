@@ -30,11 +30,11 @@ class ItemsController < ApplicationController
   def update
     item = Item.find(params[:id])
     if @item.update(item_params)
-       redirect_to item_path(@item) 
+      redirect_to item_path(@item)
     else
-     render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
+    end
   end
-end
 
   private
 
@@ -51,8 +51,8 @@ end
 
   def move_to_edit
     @item = Item.find(params[:id])
-    unless @item && current_user.id == @item.user_id
-        redirect_to action: :index
-    end
-end
+    return if @item && current_user.id == @item.user_id
+
+    redirect_to action: :index
+  end
 end
