@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :move_to_index
 
   def index
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order = Order.new
     @item = Item.find(params[:item_id])
     @order_recipient = OrderRecipient.new
@@ -21,8 +21,7 @@ class OrdersController < ApplicationController
       @order_recipient.save
       redirect_to root_path
     else
-      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-      logger.error @order_recipient.errors.full_messages.join(', ')
+      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render 'index', status: :unprocessable_entity
     end
   end
@@ -37,19 +36,21 @@ class OrdersController < ApplicationController
   def move_to_index
     @item = Item.find(params[:item_id])
     redirect_to items_path if current_user.id == @item.user_id
-  end
+    redirect_to root_path if current_user.id != @item.user_id && @item.order != nil
+
+   end
 
   def move_to_index_unsigned
     redirect_to new_user_session_path unless user_signed_in?
   end
 
   def order_params
-    params.require(:order_recipient).permit( :post_code, :delivery_from_id,
-      :address_city, :address_street, :address_building, :tel_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:order_recipient).permit(:post_code, :delivery_from_id,
+                                            :address_city, :address_street, :address_building, :tel_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     item = Item.find(order_params[:item_id])
     Payjp::Charge.create(
       amount: item.price,
