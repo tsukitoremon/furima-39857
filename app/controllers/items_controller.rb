@@ -62,10 +62,10 @@ class ItemsController < ApplicationController
   end
 
   def move_to_edit
-  if @item.order != nil 
-    redirect_to action: :index
-  elsif @item && current_user.id != @item.user_id
-    redirect_to action: :index
-  end
+    if !@item.order.nil?
+      redirect_to action: :index
+    elsif @item && current_user.id != @item.user_id
+      redirect_to action: :index
+    end
   end
 end
