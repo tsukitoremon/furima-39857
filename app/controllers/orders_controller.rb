@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_item, only: [:index]
+  before_action :set_item
   before_action :move_to_index_unsigned
   before_action :move_to_index
 
@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
 
   def move_to_index
     redirect_to items_path if current_user.id == @item.user_id
-    redirect_to root_path if current_user.id != @item.user_id && !@item.order.nil?
+    redirect_to root_path unless @item.order.nil?
   end
 
   def move_to_index_unsigned
@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order_recipient).permit(:post_code, :delivery_from_id,
-                                            :address_city, :address_street, :address_building, :tel_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+                                            :address_city, :address_street, :address_building, :tel_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id])
   end
 
   def pay_item
