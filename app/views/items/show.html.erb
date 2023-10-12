@@ -13,7 +13,6 @@
           <span>Sold Out!!</span>
         </div>
       <% end %>
-      </div>
       <div class="item-price-box">
         <span class="item-price">
           <%= @item.price %>円
@@ -21,7 +20,8 @@
         <span class="item-postage">
           <%= DeliveryCost.find(@item.delivery_cost_id).name %>
         </span>
-      </div>
+
+
       <% if @item.order == nil %>
       <% if user_signed_in? && current_user.id == @item.user_id %>
         <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
@@ -32,11 +32,12 @@
         <%= link_to "購入画面に進む", item_orders_path(@item), class: "item-red-btn" %>
       <% end %>
       <% end %>
+            </div>
     </div>
 
     <div class="item-explain-box">
     <span><%= @item.content %></span>
-
+    </div>
     <table class="detail-table">
       <tbody>
         <tr>
@@ -101,7 +102,6 @@
     </a>
   </div>
   <a href="#" class="another-item"><%= Category.find(@item.category_id).name %>をもっと見る</a>
-</div>
 </div>
 
 <%= render "shared/footer" %>
