@@ -55,7 +55,7 @@
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| price            | integer    | null: false                    |
+| order            | references | null: false, foreign_key: true |
 | post_code        | string     | null: false                    |
 | tel_number       | string     | null: false                    |
 | delivery_from_id | integer    | null: false                    |

@@ -132,11 +132,11 @@
         <%= link_to item_path(item) do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" if item.image.attached? %>
-          <%# 商品が売れていればsold outを表示しましょう %>
-          <!--<div class='sold-out'>
+          <% if item.order.present? %>
+          <div class='sold-out'>
             <span>Sold Out!!</span>
-          </div>-->
-          <%# //商品が売れていればsold outを表示しましょう %>
+          </div>
+          <% end %>
         </div>
         <div class='item-info'>
           <h3 class='item-name'>
@@ -177,7 +177,7 @@
   </div>
   <%# /商品一覧 %>
 
-<%= link_to new_item_path, class: 'purchase-btn' do %>
+<%= link_to new_item_path, class: 'purchase-btn' , data: {turbo: false} do %>
   <span class='purchase-btn-text'>出品する</span>
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
 <% end %>
