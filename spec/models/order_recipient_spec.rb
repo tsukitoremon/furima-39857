@@ -14,8 +14,18 @@ RSpec.describe OrderRecipient, type: :model do
         @order_recipient = FactoryBot.build(:order_recipient, user_id: @user.id, item_id: @item.id)
         expect(@order_recipient).to be_valid
       end
+      it '建物名が空でも登録できる' do
+        @order_recipient = FactoryBot.build(:order_recipient, user_id: @user.id, item_id: @item.id)
+        @order_recipient.address_building = ''
+        expect(@order_recipient).to be_valid
+      end
     end
     context '購入できない場合' do
+      it 'tokenが空では登録できない' do
+        @order_recipient.token = ''
+        @order_recipient.valid?
+        expect(@order_recipient.errors.full_messages).to include("Token can't be blank")
+      end
       it 'post_codeが空では登録できない' do
         @order_recipient.post_code = ''
         @order_recipient.valid?
@@ -75,6 +85,16 @@ RSpec.describe OrderRecipient, type: :model do
         @order_recipient.address_street = ''
         @order_recipient.valid?
         expect(@order_recipient.errors.full_messages).to include("Address street can't be blank")
+      end
+      it 'userが紐付いていなければ登録できない' do
+        @order_recipient.user_id = nil
+        @order_recipient.valid?
+        expect(@order_recipient.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていなければ登録できない' do
+        @order_recipient.item_id = nil
+        @order_recipient.valid?
+        expect(@order_recipient.errors.full_messages).to include("Item can't be blank")
       end
     end
   end

@@ -1,15 +1,11 @@
 class OrdersController < ApplicationController
+  before_action :set_item, only: [:index]
   before_action :move_to_index_unsigned
   before_action :move_to_index
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order = Order.new
-    @item = Item.find(params[:item_id])
-    @order_recipient = OrderRecipient.new
-  end
-
-  def new
     @order_recipient = OrderRecipient.new
   end
 
@@ -28,19 +24,17 @@ class OrdersController < ApplicationController
 
   private
 
-  def item_params
-    params.require(:item).permit(:item, :content, :image, :price, :category_id, :condition_id, :delivery_cost_id,
-                                 :delivery_date_id, :delivery_from_id).merge(user_id: current_user.id)
-  end
-
   def move_to_index
-    @item = Item.find(params[:item_id])
     redirect_to items_path if current_user.id == @item.user_id
     redirect_to root_path if current_user.id != @item.user_id && !@item.order.nil?
   end
 
   def move_to_index_unsigned
     redirect_to new_user_session_path unless user_signed_in?
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
   def order_params
